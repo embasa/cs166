@@ -63,5 +63,6 @@ public class MyRC4 {
 
 	private final byte[] S = new byte[256];
 	private final byte[] T = new byte[256];
-	private int keylen = 0;	
+	private int keylen = 0;
+	//this is only for testing commit..
 }
