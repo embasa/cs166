@@ -29,7 +29,6 @@ public class BMPEncrypt
     path = Paths.get("alice_ecb.bmp");
     Files.write(path, ct2, StandardOpenOption.CREATE);
 
-
     // Using CBC mode
     Cipher desCbc = Cipher.getInstance("DES/CBC/PKCS5Padding");
     desCbc.init(Cipher.ENCRYPT_MODE, key);
