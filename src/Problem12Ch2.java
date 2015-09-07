@@ -26,7 +26,7 @@ public class Problem12Ch2 {
   }
 
   public static void main(String[] args)throws FileNotFoundException{
-    Scanner in = new Scanner( new File( "AliceInWonderland" ) );
+    Scanner in = new Scanner( System.in );
     String cipherText = in.nextLine();
     System.out.println( "Ciphertext: " + cipherText );
     Problem12Ch2 obj = new Problem12Ch2();
@@ -35,16 +35,15 @@ public class Problem12Ch2 {
     }catch ( Exception e ){
       e.printStackTrace();
     }
-
     obj.printMap();
-    for(int i = -26;i<=26;i++) {
-      System.out.println( "Plaintext: " + obj.decryptWith( i ) );
-    }
+    System.out.print( "Guess: " );
+    Integer guess = in.nextInt();
+    System.out.println( "Plaintext: " + obj.decryptWith( guess ) );
   }
 
   public void addCipherText(String cipherText) throws Exception{
     this.cipherText = cipherText.toUpperCase();
-    for( Character c: cipherText.toCharArray()){
+    for( Character c: this.cipherText.toCharArray()){
       if(this.freq.containsKey( c )){
         this.freq.put( c, this.freq.get( c ) + 1 );
       }else{
@@ -54,7 +53,7 @@ public class Problem12Ch2 {
   }
 
   public void printMap(){
-    System.out.format( "%-10s%s\n", "character","frequency" );
+    System.out.format( "%-10s%s\n", "character", "frequency" );
     for( Map.Entry<Character,Integer> c: this.freq.entrySet()){
       System.out.format( "%-10s%d\n", c.getKey(),c.getValue() );
     }
@@ -63,13 +62,11 @@ public class Problem12Ch2 {
   public String decryptWith(int key){
     StringBuilder plainTextBuilder = new StringBuilder(  );
     char tmp;
+    System.out.println( this.cipherText );
     for(Character c : this.cipherText.toCharArray()){
       tmp =(char)( c - key);
       if(tmp < 'A'){
         tmp += 26;
-      }
-      if(tmp > 'Z'){
-        tmp -= 26;
       }
       plainTextBuilder.append( tmp );
     }
